@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Weekday int
 
@@ -30,6 +33,26 @@ func change(a int, b int) {
 func anymos() (int, int) {
 	return 300, 400
 }
+func add(a int, b int) (int, error) {
+	if b == 0 {
+		return 0, errors.New("number error")
+	}
+	d := a / b
+	return d, nil
+}
+func add1(a int, b int) int {
+	//defer 要在方法内全部代码执行完毕后才可执行，后注册的defer先执行
+	//defer后面是语句时，在注册时候就计算出来 如果是匿名函数，那么在函数计算时才执行
+	d := a + b
+	defer fmt.Println("111", d)
+	fmt.Println(d)
+	defer fmt.Println("222", d)
+	defer func() {
+		fmt.Println("333", d)
+	}()
+	d = 100
+	return d
+}
 func main() {
 	var (
 		a = 100
@@ -53,4 +76,6 @@ func main() {
 	fmt.Println(real(g))
 	fmt.Println(imag(g))
 	fmt.Println(Saturday)
+	fmt.Println(add(1, 0))
+	fmt.Println(add1(6, 7))
 }
