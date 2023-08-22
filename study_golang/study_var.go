@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 )
@@ -53,7 +54,7 @@ func add1(a int, b int) int {
 	d = 100
 	return d
 }
-func main() {
+func parameters() {
 	var (
 		a = 100
 		b = 200
@@ -78,4 +79,50 @@ func main() {
 	fmt.Println(Saturday)
 	fmt.Println(add(1, 0))
 	fmt.Println(add1(6, 7))
+}
+func main() {
+	VariadicInt(1, 23, 8, 9, 10)
+	var v1 int = 1
+	var v2 int64 = 234
+	var v3 string = "hello"
+	var v4 float32 = 1.234
+	VariadicInter(v1, v2, v3, v4)
+	fmt.Println(joinStrings("pig ", "and", " rat"))
+	fmt.Println(joinStrings("hammer", " mom", " and", " hawk"))
+}
+
+/*
+VariadicInt
+可变参数
+此方法约束为 int，如果你希望传任意类型，可以指定类型为 interface{}
+*/
+func VariadicInt(args ...int) {
+	for _, arg := range args {
+		fmt.Println(arg)
+	}
+}
+func VariadicInter(args ...interface{}) {
+	for _, arg := range args {
+		switch arg.(type) {
+		case int:
+			fmt.Println(arg, "is an int value.")
+		case string:
+			fmt.Println(arg, "is a string value.")
+		case int64:
+			fmt.Println(arg, "is an int64 value.")
+		default:
+			fmt.Println(arg, "is an unknown type.")
+		}
+	}
+}
+func joinStrings(slist ...string) string {
+	// 定义一个字节缓冲, 快速地连接字符串
+	var b bytes.Buffer
+	// 遍历可变参数列表slist, 类型为[]string
+	for _, s := range slist {
+		// 将遍历出的字符串连续写入字节数组
+		b.WriteString(s)
+	}
+	// 将连接好的字节数组转换为字符串并输出
+	return b.String()
 }
