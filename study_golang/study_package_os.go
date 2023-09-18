@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -30,13 +32,14 @@ func open1() {
 0644表示：创建了一个普通文件，文件所有者对该文件有读写权限，用户组和其他人只有读权限，都没有执行权限
 */
 func open2() {
-	file, err := os.OpenFile("study_golang/2.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
+	//file, err := os.OpenFile("study_golang/2.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("study_golang/2.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("open failed:", err)
 		return
 	}
 	defer file.Close()
-	content := "9月15日"
+	content := "9月21日\n"
 	n, err := file.Write([]byte(content))
 	if err != nil {
 		fmt.Println("write failed:", err)
@@ -44,7 +47,32 @@ func open2() {
 		fmt.Println(n)
 	}
 }
+
+func open3() {
+	file, err := os.Open("study_golang/2.txt")
+	if err != nil {
+		fmt.Println("open failed:", err)
+		return
+	}
+	defer file.Close()
+	reader := bufio.NewReader(file)
+	//读到第一次出现某字符时停止(delim)
+	for {
+		content, err := reader.ReadString('\n')
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				fmt.Println("read failed:", err)
+				return
+			}
+		} else {
+			fmt.Print(content)
+		}
+	}
+}
 func main() {
 	//open1()
-	open2()
+	//open2()
+	open3()
 }
