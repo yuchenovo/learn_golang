@@ -8,7 +8,7 @@ import (
 )
 
 func open1() {
-	file, err := os.Open("study_golang/1.txt")
+	file, err := os.Open("study_golang_grammar/1.txt")
 	if err != nil {
 		fmt.Println("open failed:", err)
 		return
@@ -32,8 +32,8 @@ func open1() {
 0644表示：创建了一个普通文件，文件所有者对该文件有读写权限，用户组和其他人只有读权限，都没有执行权限
 */
 func open2() {
-	//file, err := os.OpenFile("study_golang/2.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
-	file, err := os.OpenFile("study_golang/2.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	//file, err := os.OpenFile("study_golang_grammar/2.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("study_golang_grammar/2.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("open failed:", err)
 		return
@@ -49,7 +49,7 @@ func open2() {
 }
 
 func open3() {
-	file, err := os.Open("study_golang/2.txt")
+	file, err := os.Open("study_golang_grammar/2.txt")
 	if err != nil {
 		fmt.Println("open failed:", err)
 		return
