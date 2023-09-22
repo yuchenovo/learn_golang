@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -25,13 +26,15 @@ func sync01() {
 添加互斥锁
 */
 func sync02() {
-	var a = 0
-	var lock sync.Mutex
+	var a int32 = 0
+	//var lock sync.Mutex
 	for i := 0; i < 1000; i++ {
 		go func(idx int) {
-			lock.Lock()
-			defer lock.Unlock()
-			a += 1
+			//lock.Lock()
+			//defer lock.Unlock()
+			//a += 1
+			//原子性操作
+			atomic.AddInt32(&a, 1)
 			fmt.Printf("goroutine %d, a=%d\n", idx, a)
 		}(i)
 	}
