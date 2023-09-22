@@ -82,9 +82,9 @@ func parameters() {
 }
 func main() {
 	VariadicInt(1, 23, 8, 9, 10)
-	var v1 int = 1
+	var v1 = 1
 	var v2 int64 = 234
-	var v3 string = "hello"
+	var v3 = "hello"
 	var v4 float32 = 1.234
 	VariadicInter(v1, v2, v3, v4)
 	fmt.Println(joinStrings("pig ", "and", " rat"))
