@@ -7,7 +7,7 @@ import (
 	"g/util/math"
 )
 
-func main() {
+func all() {
 	//在不同包下 只有首字母大写 的可被调用
 	fmt.Println(util.Name, math.Add(3, 4))
 }
