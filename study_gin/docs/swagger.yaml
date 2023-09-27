@@ -1,0 +1,26 @@
+info:
+  contact: {}
+paths:
+  /getName:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 名称
+        in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"status":200,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+        "500":
+          description: '{"status":500,"data":{},"Msg":{},"Error":"error"}'
+          schema:
+            type: string
+      summary: 查询地址
+swagger: "2.0"

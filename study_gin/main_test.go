@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetName(t *testing.T) {
-	response, err := http.Get("http://localhost:2345/getName?name=123")
+	response, err := http.Get("http://localhost:2345/getName?name=柳岩")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
