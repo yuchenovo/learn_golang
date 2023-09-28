@@ -26,3 +26,16 @@ func GetName() gin.HandlerFunc {
 		ctx.String(http.StatusOK, address)
 	}
 }
+
+func UpdateUser() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		param := ctx.PostForm("name")
+		if len(param) == 0 {
+			ctx.String(http.StatusBadRequest, "lose param name")
+			return
+		}
+		s := service.GetUserSrv()
+		resp := s.UpdateUserService(ctx.Request.Context(), param)
+		ctx.JSON(http.StatusOK, resp)
+	}
+}

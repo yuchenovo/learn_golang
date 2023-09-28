@@ -18,7 +18,11 @@ func NewUserDao(ctx context.Context) *UserDao {
 }
 
 func (s *UserDao) FindUser(name string) (user *model.User) {
-	s.DB.Select("address").Where("username=?", name).
-		First(&user)
+	s.DB.Select("address").Where("username=?", name).First(&user)
+	return
+}
+
+func (s *UserDao) UpdateUser(name string) (user *model.User) {
+	s.DB.Model(&model.User{}).Where("username=?", name).Update("address", "北京市")
 	return
 }

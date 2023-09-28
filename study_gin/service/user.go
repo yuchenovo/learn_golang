@@ -24,3 +24,8 @@ func (s *UserSrv) GetNameService(ctx context.Context, param string) string {
 	name := userDao.FindUser(param)
 	return name.Address
 }
+func (s *UserSrv) UpdateUserService(ctx context.Context, name string) (req interface{}) {
+	userDao := dao.NewUserDao(ctx)
+	userDao.UpdateUser(name)
+	return
+}

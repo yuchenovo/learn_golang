@@ -17,6 +17,7 @@ func NewRouter() *gin.Engine {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler)) // 开启swag
 	r.Use(sessions.Sessions("mysession", store))
 	r.GET("/getName", api.GetName())
+	r.POST("/update", api.UpdateUser())
 	v1 := r.Group("api/v1")
 	{
 		v1.GET("ping", func(c *gin.Context) {
