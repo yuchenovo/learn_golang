@@ -1,0 +1,35 @@
+//设置v3版本
+syntax="proto3";
+//包名
+package idl;
+//转化成go之后对应package名称  ./idl/my_proto目录名称 可以和package名称不一样
+option go_package="./idl/my_proto;student_service";
+import "google/protobuf/timestamp.proto";
+/*
+  定义结构体
+  需要给属性进行唯一编号 用来序列化和反序列化
+  repeated 等同于 list
+  属性名称会自动转化为驼峰
+*/
+message Student{
+  string Name = 1;
+  int32 Age = 2;
+  bool Gender = 3;
+  float Height = 4;
+  repeated string Locations = 5;
+  map<string,float> score = 6;
+  google.protobuf.Timestamp birthday = 7;
+}
+
+message Request{
+  string studentId = 1;
+}
+//定义接口
+service StudentService{
+  rpc GetStudentInfo(Request) returns (Student);
+}
+
+//go install github.com/gogo/protobuf/protoc-gen-gogofaster@latest
+//protoc --gogofaster_out=plugins=grpc:. --proto_path=./idl -I=./idl/third_proto student_service.proto
+//protoc --go_out=plugins=grpc:. --proto_path=./idl -I=./idl/third_proto student_service.proto
+//protoc --gogofaster_out=plugins=grpc:D:\learn_golang\study_grpc --proto_path=D:\learn_golang\study_grpc/idl -I=D:\learn_golang\study_grpc/idl/third_proto student_service.proto
