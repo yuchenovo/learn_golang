@@ -17,9 +17,18 @@ func main() {
 	//	return
 	//}
 	r := gin.Default()
+	//r.GET("/ping", func(c *gin.Context) {
+	//	c.JSON(200, gin.H{
+	//		"message": "pong",
+	//	})
+	//})
 	r.GET("/ping", func(c *gin.Context) {
+		name, err := c.GetQuery("name")
+		if !err {
+			fmt.Printf("query lost:%+v\n", err)
+		}
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"name": name,
 		})
 	})
 	r.Run()
